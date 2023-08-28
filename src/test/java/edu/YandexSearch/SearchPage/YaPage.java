@@ -41,7 +41,7 @@ public class YaPage {
         }
 
         open("https://ya.ru");
-        Selenide.$(Selectors.byAttribute("placeholder", "найдётся всё")).setValue(search).pressEnter();
+        Selenide.$("#text").setValue(search).pressEnter();
 
         return new SearchResultPage();
     }
