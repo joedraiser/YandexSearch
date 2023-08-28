@@ -11,10 +11,10 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class YaRuPage {
+public class YaPage {
     private final ArrayList<Cookie> cookies = new ArrayList<>();
 
-    public YaRuPage setCookies (String cookiesString, String domain) {
+    public YaPage setCookies (String cookiesString, String domain) {
         Map<String,String> cookiesMap = new HashMap<>();
 
         for(var cookieString : cookiesString.split(";")) {
@@ -28,11 +28,11 @@ public class YaRuPage {
         return this;
     }
 
-    public YaRuPage setCookies (String cookiesString) {
+    public YaPage setCookies (String cookiesString) {
         return setCookies(cookiesString, "ya.ru");
     }
 
-    public YandexSearchResultPage search(String search) {
+    public SearchResultPage search(String search) {
         if(cookies.size()!=0) {
             open("https://ya.ru");
             for (var cookie : cookies) {
@@ -43,6 +43,6 @@ public class YaRuPage {
         open("https://ya.ru");
         Selenide.$(Selectors.byAttribute("placeholder", "найдётся всё")).setValue(search).pressEnter();
 
-        return new YandexSearchResultPage();
+        return new SearchResultPage();
     }
 }

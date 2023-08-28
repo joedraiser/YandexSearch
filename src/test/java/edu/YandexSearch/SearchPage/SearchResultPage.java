@@ -5,10 +5,10 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.util.*;
 
-public class YandexSearchResultPage {
+public class SearchResultPage {
     private final List<SearchResult> searchResults = new ArrayList<>();
 
-    YandexSearchResultPage() {
+    SearchResultPage() {
         var results = Selenide.$$("#search-result > li");
 
         for(var result : results) {
