@@ -14,6 +14,10 @@ import static com.codeborne.selenide.Selenide.open;
 public class YaPage {
     private final ArrayList<Cookie> cookies = new ArrayList<>();
 
+    public YaPage() {
+        open("https://ya.ru");
+    }
+
     public YaPage setCookies (String cookiesString, String domain) {
         Map<String,String> cookiesMap = new HashMap<>();
 
@@ -25,6 +29,12 @@ public class YaPage {
             cookies.add(new Cookie(key, cookiesMap.get(key), domain, "/", null));
         }
 
+        for (var cookie : cookies) {
+            WebDriverRunner.getWebDriver().manage().addCookie(cookie);
+        }
+
+        open("https://ya.ru");
+
         return this;
     }
 
@@ -33,14 +43,6 @@ public class YaPage {
     }
 
     public SearchResultPage search(String search) {
-        if(cookies.size()!=0) {
-            open("https://ya.ru");
-            for (var cookie : cookies) {
-                WebDriverRunner.getWebDriver().manage().addCookie(cookie);
-            }
-        }
-
-        open("https://ya.ru");
         Selenide.$("#text").setValue(search).pressEnter();
 
         return new SearchResultPage();

@@ -9,6 +9,12 @@ public class SearchResultPage {
     private final List<SearchResult> searchResults = new ArrayList<>();
 
     SearchResultPage() {
+        updateSearchResults();
+    }
+
+    private void updateSearchResults() {
+        searchResults.clear();
+
         var results = Selenide.$$("#search-result > li");
 
         for(var result : results) {
@@ -29,5 +35,14 @@ public class SearchResultPage {
 
     public void clickOnSearchResult(int index) {
         searchResults.get(index).titleElement().click();
+    }
+
+    public SearchResultPage newSearch(String search) {
+        Selenide.$("#fdqaimg-Of1WJI7 > div.HeaderDesktop.i-bem.input_voice-search_yes > header > form > div.HeaderDesktopForm-InputWrapper > button").click();
+        Selenide.$("#fdqaimg-Of1WJI7 > div.HeaderDesktop.i-bem.input_voice-search_yes > header > form > div.HeaderDesktopForm-InputWrapper > input").setValue(search).pressEnter();
+
+        updateSearchResults();
+
+        return this;
     }
 }
