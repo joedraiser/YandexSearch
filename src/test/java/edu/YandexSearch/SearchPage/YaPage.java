@@ -3,6 +3,7 @@ package edu.YandexSearch.SearchPage;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Cookie;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class YaPage {
         open("https://ya.ru");
     }
 
+    @Step("Setting Cookies to bypass captcha")
     public YaPage setCookies (String cookiesString, String domain) {
         Map<String,String> cookiesMap = new HashMap<>();
 
@@ -38,10 +40,12 @@ public class YaPage {
         return this;
     }
 
+    @Step("Setting Cookies to bypass captcha")
     public YaPage setCookies (String cookiesString) {
         return setCookies(cookiesString, "ya.ru");
     }
 
+    @Step("Input search string")
     public SearchResultPage search(String search) {
         Selenide.$("#text").setValue(search).pressEnter();
 

@@ -4,6 +4,7 @@ import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.util.*;
 
@@ -13,7 +14,7 @@ public class SearchResultPage {
     SearchResultPage() {
         updateSearchResults();
     }
-
+    @Step("Update search result array")
     private void updateSearchResults() {
         searchResults.clear();
 
@@ -31,14 +32,17 @@ public class SearchResultPage {
             catch (com.codeborne.selenide.ex.ElementNotFound e) {}
         }
     }
+    @Step("Return search result array")
     public List<SearchResult> getResults() {
         return new ArrayList<>(searchResults);
     }
 
+    @Step("Open search result by index")
     public void clickOnSearchResult(int index) {
         searchResults.get(index).titleElement().click();
     }
 
+    @Step("Make a new search in a Search Result page")
     public SearchResultPage newSearch(String search) {
         Selenide.$("button[class='HeaderDesktopForm-Clear mini-suggest__input-clear']").click();
         Selenide.$("input[class='HeaderDesktopForm-Input mini-suggest__input']").setValue(search).pressEnter();

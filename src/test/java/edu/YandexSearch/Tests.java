@@ -8,6 +8,9 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import edu.YandexSearch.SearchPage.SearchResult;
 import edu.YandexSearch.SearchPage.YaPage;
 import edu.YandexSearch.SearchPage.SearchResultPage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,19 +33,22 @@ public class Tests {
         searchResults = resultPage.getResults();
     }
 
-    @Test
+    @Test()
+    @Description("Проверка что ВК Звонки выпадают первыми")
     void isFirst() {
         String firstSearchResultTitle = searchResults.get(0).title();
         assertEquals("VK Звонки: приложение для групповых видеоконференций", firstSearchResultTitle);
     }
 
     @Test
+    @Description("Проверка что URL равен референсному значению")
     void isUrlValid() {
         String urlOfFirstSearchResult = searchResults.get(0).url();
         assertEquals("https://calls.vk.com/", urlOfFirstSearchResult);
     }
 
     @Test
+    @Description("Проверка, что при открытии первого результата открывается верный сайт")
     void isLinkOperable() {
         resultPage.clickOnSearchResult(0);
         switchTo().window(1);
@@ -53,6 +59,7 @@ public class Tests {
     }
 
     @Test
+    @Description("Тест который всегда падает")
     void testThatAlwaysFail() {
         resultPage.newSearch("WhatsApp");
         Selenide.$("#search-result > li:nth-child(3)").shouldHave(Condition.exactText("VK Звонки: приложение для групповых видеоконференций"));
