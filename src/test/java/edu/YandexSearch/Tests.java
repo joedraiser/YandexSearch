@@ -1,7 +1,6 @@
 package edu.YandexSearch;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -9,8 +8,6 @@ import edu.YandexSearch.SearchPage.SearchResult;
 import edu.YandexSearch.SearchPage.YaPage;
 import edu.YandexSearch.SearchPage.SearchResultPage;
 import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

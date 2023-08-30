@@ -1,6 +1,5 @@
 package edu.YandexSearch.SearchPage;
 
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
