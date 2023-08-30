@@ -61,7 +61,7 @@ public class Tests {
 
     //Тест который падает
     @Test
-    @DisplayName("Тест который всегда падает")
+    @DisplayName("Test that always fails")
     void testThatAlwaysFail() {
         resultPage.newSearch("WhatsApp");
         Selenide.$("#search-result > li:nth-child(3)").shouldHave(Condition.exactText("VK Звонки: приложение для групповых видеоконференций"));
