@@ -1,5 +1,7 @@
 package edu.YandexSearch.SearchPage;
 
+import com.codeborne.selenide.ClickOptions;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
@@ -9,6 +11,12 @@ public class SearchResultPage {
     private final List<SearchResult> searchResults = new ArrayList<>();
 
     SearchResultPage() {
+        updateSearchResults();
+    }
+
+    private void updateSearchResults() {
+        searchResults.clear();
+
         var results = Selenide.$$("#search-result > li");
 
         for(var result : results) {
@@ -29,5 +37,14 @@ public class SearchResultPage {
 
     public void clickOnSearchResult(int index) {
         searchResults.get(index).titleElement().click();
+    }
+
+    public SearchResultPage newSearch(String search) {
+        Selenide.$("button[class='HeaderDesktopForm-Clear mini-suggest__input-clear']").click();
+        Selenide.$("input[class='HeaderDesktopForm-Input mini-suggest__input']").setValue(search).pressEnter();
+
+        updateSearchResults();
+
+        return this;
     }
 }
