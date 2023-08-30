@@ -7,9 +7,9 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import edu.YandexSearch.SearchPage.SearchResult;
 import edu.YandexSearch.SearchPage.YaPage;
 import edu.YandexSearch.SearchPage.SearchResultPage;
-import io.qameta.allure.Description;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -22,6 +22,7 @@ public class Tests {
     private static SearchResultPage resultPage;
 
     @BeforeAll
+    //Открытие ya.ru, установка куки для обхода капчи и
     static void initialSetUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         resultPage = new YaPage()
@@ -30,22 +31,25 @@ public class Tests {
         searchResults = resultPage.getResults();
     }
 
+    //Провекрка на то что ВК Звонки первые в списке
     @Test()
-    @Description("Проверка что ВК Звонки выпадают первыми")
+    @DisplayName("Check that ВК Звонки are first in the search results")
     void isFirst() {
         String firstSearchResultTitle = searchResults.get(0).title();
         assertEquals("VK Звонки: приложение для групповых видеоконференций", firstSearchResultTitle);
     }
 
+    //Прверка URL
     @Test
-    @Description("Проверка что URL равен референсному значению")
+    @DisplayName("URL is correct")
     void isUrlValid() {
         String urlOfFirstSearchResult = searchResults.get(0).url();
         assertEquals("https://calls.vk.com/", urlOfFirstSearchResult);
     }
 
+    //При нажатии на первый результат поиска открывается сайт ВК Звонков
     @Test
-    @Description("Проверка, что при открытии первого результата открывается верный сайт")
+    @DisplayName("Link can be clicked and proper site opens")
     void isLinkOperable() {
         resultPage.clickOnSearchResult(0);
         switchTo().window(1);
@@ -55,8 +59,9 @@ public class Tests {
         assertEquals("https://calls.vk.com/",urlOpened);
     }
 
+    //Тест который падает
     @Test
-    @Description("Тест который всегда падает")
+    @DisplayName("Тест который всегда падает")
     void testThatAlwaysFail() {
         resultPage.newSearch("WhatsApp");
         Selenide.$("#search-result > li:nth-child(3)").shouldHave(Condition.exactText("VK Звонки: приложение для групповых видеоконференций"));
