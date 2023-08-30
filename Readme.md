@@ -1,0 +1,1 @@
+Open http://151.248.113.73/ with admin/admin and run these tests there.
